@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/firstpage.css">
+	<link rel="stylesheet" type="text/css" href="css/all.css">
+
+	<script src="js/jquery-3.5.1.slim.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container h-100 d-flex justify-content-center">
+		<div class="jumbotron my-auto">
+			<span>Welcome to our OutRun Game, </span>
+			<span th:text="${name}"></span>
+		</div>
+	</div>
+
+	<br>
+	<div class="menu">
+
+		<div class="container">
+			<nav class="navbar navbar-expand-md navbar-light bg-light">
+				<a class="navbar-brand p-1 mr-5">Menu</a>
+
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item navbar-nav p-1">
+						<form th:action="@{'/game?name=' + ${currentUser.nickname}}" method="post">
+							<input type="hidden" name="name" id="name" th:value="${currentUser.nickname}">
+							<input type="submit" class="btn btn-outline-danger" value="Play Game">
+						</form>
+					</li>
+					<li class="nav-item navbar-nav p-1">
+						<form th:action="@{'/user?name=' + ${currentUser.nickname}}" method="get">
+							<input type="hidden" name="name" id="name" th:value="${currentUser.nickname}">
+							<input type="submit" class="btn btn-outline-danger" value="Highscores">
+						</form>
+					</li>
+					<li class="nav-item navbar-nav p-1">
+						<form th:action="@{/records}" method="get">
+							<input type="hidden" name="name" id="name" th:value="${currentUser.nickname}">
+							<input type="submit" class="btn btn-outline-danger" value="All Records">
+						</form>
+					</li>
+					<li class="nav-item navbar-nav p-1">
+						<form th:action="@{'/profile?name=' + ${currentUser.nickname}}" method="get">
+							<input type="hidden" name="name" id="name" th:value="${currentUser.nickname}">
+							<input type="submit" class="btn btn-outline-danger" value="Your Profile">
+						</form>
+					</li>
+					<li class="nav-item navbar-nav p-1">
+						<form th:action="@{/logout}" method="post">
+							<input type="hidden" name="name" id="name" th:value="${currentUser.nickname}">
+							<input type="submit" class="btn btn-outline-danger" value="Log Out">
+						</form>
+					</li>
+				</ul>
+
+			</nav>
+		</div>
+
+		<div class="description">
+			<p>
+				Lay back behind the wheel of a red convertible car and take a nice sweet trip as you ride around
+				California-inspired landscapes in OutRun! Ride around with your girlfriend as you get behind the wheels
+				of your Ferrari Testarrossa and enjoy the 16-bit sceneries!
+				Unlike most games during the time, this game isn’t really a racing game but a driving game. Travel
+				through beach, alps, ruins, deserts, and more as you compete against the clock. Decide the route you
+				wish to take and hit the gas pedal! Have fun!
+			</p>
+		</div>
+		<img src="images/redcar.gif">
+	</div>
+
+</body>
+
+</html>

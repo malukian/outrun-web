@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head" th:remove="tag">
+
+<body>
+	<div th:include="fragments/body :: headline (txt='this is your Statistics' )"></div>
+	<div th:include="fragments/body :: nav (all=true)"></div>
+
+
+	<section class="container">
+		<div class="section-title h5">Statistics of Player:
+			<span th:text="${player.name}"></span>
+		</div>
+		<br>
+
+		<table class="table table-hover table-bordered table-sm" th:if="${bestRecord != null}">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Record</th>
+					<th scope="col">Best Time</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<td>
+					<div th:name="modelAttr">
+						<span>Your best record is</span>
+					</div>
+				</td>
+				<td>
+					<span th:text="${bestRecord}"></span>
+				</td>
+
+			</tbody>
+		</table>
+
+		<br>
+		<table class="table table-hover table-bordered table-sm" th:if="${records != null}">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Record ID</th>
+					<th scope="col">Time</th>
+					<th scope="col">Timestamp</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="record : ${records}">
+					<td>
+						<div th:name="modelAttr">
+							<span th:text="${record.num}"></span>
+						</div>
+					</td>
+					<td>
+						<span th:text="${record.recordTimeString}"></span>
+					</td>
+					<td>
+						<span th:text="${record.timestamp}"></span>
+					</td>
+					<td>
+						<form th:action="@{/deleteRecord(name=${player.name},num=${record.num})}" th:method="post">
+							<input type="submit" class="btn btn-outline-danger btn-sm" value="delete">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS Project: OutRun Game, " + year;
+	</script>
+</body>
+
+</html>

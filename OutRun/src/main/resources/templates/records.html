@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head" th:remove="tag">
+
+<body>
+	<div th:include="fragments/body :: headline (txt='to page of Highscores' )"></div>
+	<div th:include="fragments/body :: nav (all=true)"></div>
+
+	<section class="container">
+		<div class="section-title h5">
+			<span>Best Records of Players</span>
+		</div>
+
+		<br>
+		<table class="table table-hover table-bordered table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Best 3 Records Overall</th>
+					<th scope="col">Best Record of Player</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr>
+
+					<td>
+
+
+						<table class="table table-hover table-bordered table-sm" th:if="${playersRecords != null}">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">Place</th>
+									<th scope="col">Player</th>
+									<th scope="col">Time</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="record,count : ${playersRecords}">
+									<td>
+										<span th:text="${count.count}"></span>
+									</td>
+									<td>
+										<span th:text="${record.player.name}"></span>
+									</td>
+									<td>
+										<span th:text="${record.recordTimeString}"></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+
+					</td>
+
+					<td>
+
+
+						<table class="table table-hover table-bordered table-sm" th:if="${bestRecordsList != null}">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">Player</th>
+									<th scope="col">Best Time</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="player : ${bestRecordsList.keySet()}">
+									<td>
+										<span th:text="${player.name}"></span>
+									</td>
+									<td>
+										<span th:text="${bestRecordsList.get(player)}"></span>
+									</td>
+
+								</tr>
+							</tbody>
+						</table>
+
+
+					</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</section>
+
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS Project: OutRun Game, " + year;
+	</script>
+</body>
+
+</html>

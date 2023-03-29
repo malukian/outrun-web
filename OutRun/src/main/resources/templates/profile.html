@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div th:include="fragments/body :: headline (txt='to your profile' )"></div>
+	<div th:include="fragments/body :: nav (all=true)"></div>
+
+	<div class="container">
+		<table class="table table-hover table-bordered table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">User Details</th>
+					<th scope="col">
+						<form th:action="@{/deleteUser(name=${currentUser.nickname})}" th:method="post">
+							<input type="submit" class="btn btn-danger btn-sm" value="Delete User">
+						</form>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Nickname</td>
+					<td th:text="${user.nickname}">Nickname</td>
+				</tr>
+				<tr>
+					<td>E-Mail</td>
+					<td th:text="${user.email}">E-Mail</td>
+				</tr>
+				<tr>
+					<td>Passwort</td>
+					<td>***</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS Project: OutRun Game, " + year;
+	</script>
+</body>
+
+</html>

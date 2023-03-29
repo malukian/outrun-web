@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div th:include="fragments/body :: headline (txt='to registration' )"></div>
+
+	<div class="container">
+
+		<h5>new user</h5>
+		<form class="bs-example error" th:action="@{/create}" th:object="${regform}" method="post" role="form">
+			<br>
+			<input type="text" name="nickname" class="form-control" placeholder="nickname" required="required"
+				autofocus="autofocus">
+			<br>
+			<input type="text" name="email" class="form-control" placeholder="email" required="required">
+			<br>
+			<input type="password" name="password" class="form-control" placeholder="password" required="required">
+			<br>
+			<input type="password" name="passwordRepeated" class="form-control" placeholder="password repeated"
+				required="required">
+			<br>
+			<div class="error">
+				<input type="submit" class="btn btn-outline-primary" th:value="register">
+				<a>
+					<span class="error text-danger" th:if="${error}" th:text="${error}">The email or password you have
+						entered is invalid!</span>
+				</a>
+			</div>
+		</form>
+
+		<br>
+
+	</div>
+
+	<br>
+	<div th:include="fragments/footer :: footer"></div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		document.getElementById("today").innerHTML = "&copy; FRA-UAS Project: OutRun Game, " + year;
+	</script>
+</body>
+
+</html>
