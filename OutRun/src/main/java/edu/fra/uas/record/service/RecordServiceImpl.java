@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -108,52 +109,18 @@ public class RecordServiceImpl implements RecordService {
 		return records;
 	}
 	//finds three best records from given list of Record objects
-	public List<Record> findBestThree(List<Record> records) {
+	public List<Record> findBestThreeRecords(List<Record> records) {
 		log.debug("find best three records");
-		
+
 		//checks if the input list has at least three records
 		if (records.size() < 3) {
 			return null;
 		}
 		
-		ArrayList<Record> three = new ArrayList<>(3);
-		for (int i = 0; i < 3; i++) {
-			three.add(records.get(i));
-		}
-		//compares record times to three best records
-		for (Record record : records) {
-			for (Record bestrecord : three) {
-				if (record.getRecordTimeDouble() < bestrecord.getRecordTimeDouble()) {
-					three.remove(bestrecord);
-					three.add(record);
-					break;
-				}
-			}
-		}
-		//creates new ArrayList to hold the three best records, calculates the minimum, 
-		//maximum and middle record times from the three best records
-		ArrayList<Record> bestThree = new ArrayList<>(3);
+		records.sort(Comparator.comparing(Record::getRecordTimeDouble));
+		return records.subList(0, 3);
+		
 
-		double x = three.get(0).getRecordTimeDouble();
-		double y = three.get(1).getRecordTimeDouble();
-		double z = three.get(2).getRecordTimeDouble();
-		double max = Math.max(x, Math.max(y, z));
-		double min = Math.min(x, Math.min(y, z));
-		double mid = x + y + z - max - min;
-		Double temp[] = { min, mid, max };
-
-		for (Double num : temp) {
-
-			for (Record record : three) {
-
-				if (num == record.getRecordTimeDouble()) {
-					bestThree.add(record);
-					break;
-				}
-			}
-		}
-
-		return bestThree;
 	}
 	//defines method getTimestamp() that returns the current time as string formatted with the German locale 
 	public String getTimestamp() {

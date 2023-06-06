@@ -21,6 +21,6 @@ public interface RecordService {
 
 	List<Record> getAllRecords();
 	
-	List<Record> findBestThree(List<Record> records);
+	List<Record> findBestThreeRecords(List<Record> records);
 
 }

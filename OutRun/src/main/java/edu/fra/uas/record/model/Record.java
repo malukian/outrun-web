@@ -72,7 +72,7 @@ public class Record {
 	
 	@Override
     public String toString() {
-        return "Record{player=" + player.getName() + " num: " + num + " Time=" + recordTimeDouble + " at=" + timestamp + "}";
+        return "Record{player=" + player.getName() + " id=" + id + " num:" + num + " Time=" + recordTimeDouble + " at=" + timestamp + "}";
     }
 	
 }

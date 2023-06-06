@@ -42,7 +42,7 @@ public class RecordController {
 		HashMap<Player, String> bestRecordsMap = playerService.findBestRecords(players);
 		LinkedHashMap<Player, String> sortedBestRecordsMap = recordService.sortPlayerByBestRecords(bestRecordsMap);
 		
-		List<Record> playersRecords = recordService.findBestThree(records);
+		List<Record> playersRecords = recordService.findBestThreeRecords(records);
 				
 		model.addAttribute("playersRecords", playersRecords);
 		model.addAttribute("bestRecordsList", sortedBestRecordsMap);
